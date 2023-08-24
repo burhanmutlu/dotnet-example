@@ -1,11 +1,17 @@
-﻿using Microsoft;
+﻿using System.Web.Mvc;
+using AspNetWebFMvc.Models.EntityFramework;
+
+
 
 namespace AspNetCoreWebAppMvc.Controllers
 {
     public class HomeController : Controller
     {
-		public IActionResult Index()
+        DbMvcOkulEntities1 db = new DbMvcOkulEntities1 ();
+
+		public ActionResult Index()
         {
+            var dersler = db.
             return View();
         }
     }

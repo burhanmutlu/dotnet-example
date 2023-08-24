@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbMvcOkulModelStoreContainer" CdmEntityContainer="DbMvcOkulEntities1">
+    <EntitySetMapping Name="tbl_dersler">
+      <EntityTypeMapping TypeName="DbMvcOkulModel.tbl_dersler">
+        <MappingFragment StoreEntitySet="tbl_dersler">
+          <ScalarProperty Name="ders_id" ColumnName="ders_id" />
+          <ScalarProperty Name="ders_ad" ColumnName="ders_ad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_kulupler">
+      <EntityTypeMapping TypeName="DbMvcOkulModel.tbl_kulupler">
+        <MappingFragment StoreEntitySet="tbl_kulupler">
+          <ScalarProperty Name="kulup_id" ColumnName="kulup_id" />
+          <ScalarProperty Name="kulup_ad" ColumnName="kulup_ad" />
+          <ScalarProperty Name="kulup_kontenjan" ColumnName="kulup_kontenjan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_notlar">
+      <EntityTypeMapping TypeName="DbMvcOkulModel.tbl_notlar">
+        <MappingFragment StoreEntitySet="tbl_notlar">
+          <ScalarProperty Name="not_id" ColumnName="not_id" />
+          <ScalarProperty Name="ders_id" ColumnName="ders_id" />
+          <ScalarProperty Name="ogr_id" ColumnName="ogr_id" />
+          <ScalarProperty Name="sinav1" ColumnName="sinav1" />
+          <ScalarProperty Name="sinav2" ColumnName="sinav2" />
+          <ScalarProperty Name="sinav3" ColumnName="sinav3" />
+          <ScalarProperty Name="proje" ColumnName="proje" />
+          <ScalarProperty Name="ortalama" ColumnName="ortalama" />
+          <ScalarProperty Name="durum" ColumnName="durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ogrenciler">
+      <EntityTypeMapping TypeName="DbMvcOkulModel.tbl_ogrenciler">
+        <MappingFragment StoreEntitySet="tbl_ogrenciler">
+          <ScalarProperty Name="ogr_id" ColumnName="ogr_id" />
+          <ScalarProperty Name="ogr_ad" ColumnName="ogr_ad" />
+          <ScalarProperty Name="ogr_soyad" ColumnName="ogr_soyad" />
+          <ScalarProperty Name="ogr_fotograf" ColumnName="ogr_fotograf" />
+          <ScalarProperty Name="ogr_cinsiyet" ColumnName="ogr_cinsiyet" />
+          <ScalarProperty Name="ogr_kulup" ColumnName="ogr_kulup" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

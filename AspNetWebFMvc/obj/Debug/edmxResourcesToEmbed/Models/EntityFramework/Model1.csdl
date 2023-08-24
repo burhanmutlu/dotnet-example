@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbMvcOkulModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_dersler">
+    <Key>
+      <PropertyRef Name="ders_id" />
+    </Key>
+    <Property Name="ders_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ders_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_notlar" Relationship="Self.FK_tbl_notlar_tbl_dersler" FromRole="tbl_dersler" ToRole="tbl_notlar" />
+  </EntityType>
+  <EntityType Name="tbl_kulupler">
+    <Key>
+      <PropertyRef Name="kulup_id" />
+    </Key>
+    <Property Name="kulup_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kulup_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="kulup_kontenjan" Type="Int16" />
+    <NavigationProperty Name="tbl_ogrenciler" Relationship="Self.FK_tbl_ogrenciler_tbl_kulupler" FromRole="tbl_kulupler" ToRole="tbl_ogrenciler" />
+  </EntityType>
+  <EntityType Name="tbl_notlar">
+    <Key>
+      <PropertyRef Name="not_id" />
+    </Key>
+    <Property Name="not_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ders_id" Type="Byte" />
+    <Property Name="ogr_id" Type="Int32" />
+    <Property Name="sinav1" Type="Byte" />
+    <Property Name="sinav2" Type="Byte" />
+    <Property Name="sinav3" Type="Byte" />
+    <Property Name="proje" Type="Byte" />
+    <Property Name="ortalama" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="durum" Type="Boolean" />
+    <NavigationProperty Name="tbl_dersler" Relationship="Self.FK_tbl_notlar_tbl_dersler" FromRole="tbl_notlar" ToRole="tbl_dersler" />
+    <NavigationProperty Name="tbl_ogrenciler" Relationship="Self.FK_tbl_notlar_tbl_ogrenciler" FromRole="tbl_notlar" ToRole="tbl_ogrenciler" />
+  </EntityType>
+  <EntityType Name="tbl_ogrenciler">
+    <Key>
+      <PropertyRef Name="ogr_id" />
+    </Key>
+    <Property Name="ogr_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ogr_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ogr_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ogr_fotograf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ogr_cinsiyet" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="ogr_kulup" Type="Byte" />
+    <NavigationProperty Name="tbl_kulupler" Relationship="Self.FK_tbl_ogrenciler_tbl_kulupler" FromRole="tbl_ogrenciler" ToRole="tbl_kulupler" />
+    <NavigationProperty Name="tbl_notlar" Relationship="Self.FK_tbl_notlar_tbl_ogrenciler" FromRole="tbl_ogrenciler" ToRole="tbl_notlar" />
+  </EntityType>
+  <Association Name="FK_tbl_notlar_tbl_dersler">
+    <End Role="tbl_dersler" Type="Self.tbl_dersler" Multiplicity="0..1" />
+    <End Role="tbl_notlar" Type="Self.tbl_notlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_dersler">
+        <PropertyRef Name="ders_id" />
+      </Principal>
+      <Dependent Role="tbl_notlar">
+        <PropertyRef Name="ders_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ogrenciler_tbl_kulupler">
+    <End Role="tbl_kulupler" Type="Self.tbl_kulupler" Multiplicity="0..1" />
+    <End Role="tbl_ogrenciler" Type="Self.tbl_ogrenciler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_kulupler">
+        <PropertyRef Name="kulup_id" />
+      </Principal>
+      <Dependent Role="tbl_ogrenciler">
+        <PropertyRef Name="ogr_kulup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_notlar_tbl_ogrenciler">
+    <End Role="tbl_ogrenciler" Type="Self.tbl_ogrenciler" Multiplicity="0..1" />
+    <End Role="tbl_notlar" Type="Self.tbl_notlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ogrenciler">
+        <PropertyRef Name="ogr_id" />
+      </Principal>
+      <Dependent Role="tbl_notlar">
+        <PropertyRef Name="ogr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbMvcOkulEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_dersler" EntityType="Self.tbl_dersler" />
+    <EntitySet Name="tbl_kulupler" EntityType="Self.tbl_kulupler" />
+    <EntitySet Name="tbl_notlar" EntityType="Self.tbl_notlar" />
+    <EntitySet Name="tbl_ogrenciler" EntityType="Self.tbl_ogrenciler" />
+    <AssociationSet Name="FK_tbl_notlar_tbl_dersler" Association="Self.FK_tbl_notlar_tbl_dersler">
+      <End Role="tbl_dersler" EntitySet="tbl_dersler" />
+      <End Role="tbl_notlar" EntitySet="tbl_notlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ogrenciler_tbl_kulupler" Association="Self.FK_tbl_ogrenciler_tbl_kulupler">
+      <End Role="tbl_kulupler" EntitySet="tbl_kulupler" />
+      <End Role="tbl_ogrenciler" EntitySet="tbl_ogrenciler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_notlar_tbl_ogrenciler" Association="Self.FK_tbl_notlar_tbl_ogrenciler">
+      <End Role="tbl_ogrenciler" EntitySet="tbl_ogrenciler" />
+      <End Role="tbl_notlar" EntitySet="tbl_notlar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
